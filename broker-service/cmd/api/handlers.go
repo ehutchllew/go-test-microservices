@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+
+	utils "ehutchllew/go-utils"
 )
 
 func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
@@ -10,5 +12,5 @@ func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
 		Message: "Hit the broker",
 	}
 
-	_ = app.writeJSON(w, http.StatusOK, payload)
+	_ = utils.WriteJSON(w, http.StatusOK, payload)
 }

@@ -3,6 +3,7 @@ module authentication
 go 1.21.3
 
 require (
+	ehutchllew/go-utils v0.0.0-00010101000000-000000000000
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/go-chi/cors v1.2.1
 	github.com/jackc/pgconn v1.14.1
@@ -19,3 +20,5 @@ require (
 	github.com/jackc/pgtype v1.14.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 )
+
+replace ehutchllew/go-utils => ../utils

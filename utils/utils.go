@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"encoding/json"
@@ -7,13 +7,20 @@ import (
 	"net/http"
 )
 
+type Utils struct {
+	MaxJSONSize        int
+	MaxFileSize        int
+	AllowedFileTypes   []string
+	AllowUnknownFields bool
+}
+
 type JsonResponse struct {
 	Error   bool   `json:"error"`
 	Message string `json:"message"`
 	Data    any    `json:"data,omitempty"`
 }
 
-func (app *Config) readJSON(w http.ResponseWriter, r *http.Response, data any) error {
+func (app *Utils) ReadJSON(w http.ResponseWriter, r *http.Request, data any) error {
 	maxBytes := 1048576 // one megabtye
 
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
@@ -33,7 +40,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Response, data any) e
 }
 
 // use of variadic in these methods is to provide an 'optional' functionality -- alt way would be using pointers and checking nil
-func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, headers ...http.Header) error {
+func (app *Utils) WriteJSON(w http.ResponseWriter, status int, data any, headers ...http.Header) error {
 	out, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -55,7 +62,7 @@ func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, header
 	return nil
 }
 
-func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) error {
+func (app *Utils) ErrorJSON(w http.ResponseWriter, err error, status ...int) error {
 	statusCode := http.StatusBadRequest
 
 	if len(status) > 0 {
@@ -67,5 +74,5 @@ func (app *Config) errorJSON(w http.ResponseWriter, err error, status ...int) er
 		Message: err.Error(),
 	}
 
-	return app.writeJSON(w, statusCode, payload)
+	return app.WriteJSON(w, statusCode, payload)
 }
