@@ -1,3 +1,7 @@
 # go binaries
+authentication-service/authApp
 broker-service/brokerApp
 front-end/frontApp
+
+# DB
+db-data/

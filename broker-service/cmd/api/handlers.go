@@ -3,14 +3,16 @@ package main
 import (
 	"net/http"
 
-	utils "ehutchllew/go-utils"
+	goUtils "ehutchllew/go-utils"
 )
 
 func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
-	payload := JsonResponse{
+	payload := goUtils.JsonResponse{
 		Error:   false,
 		Message: "Hit the broker",
 	}
+
+	utils := goUtils.Utils{}
 
 	_ = utils.WriteJSON(w, http.StatusOK, payload)
 }
