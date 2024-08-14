@@ -1,10 +1,11 @@
 package main
 
 import (
-	goUtils "ehutchllew/go-utils"
 	"errors"
 	"fmt"
 	"net/http"
+
+	goUtils "ehutchllew/go-utils"
 )
 
 func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
