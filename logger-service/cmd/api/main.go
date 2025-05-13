@@ -13,10 +13,10 @@ import (
 )
 
 const (
-	GRPC_PORT = 50002
+	GRPC_PORT = "50002"
 	MONGO_URL = "mongodb://mongo:27017"
-	PORT      = 9002
-	RPC_PORT  = 5002
+	PORT      = "9002"
+	RPC_PORT  = "5002"
 )
 
 var client *mongo.Client
@@ -50,7 +50,7 @@ func main() {
 	}
 
 	// start server
-	go app.serve()
+	app.serve()
 }
 
 func (c *Config) serve() {
